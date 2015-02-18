@@ -56,14 +56,5 @@ public class Marcianito {
         ventana.dibujaCirculo(x, y, LONG_RADIO, Color.green);
         ventana.dibujaCirculo(x-0.3, y+0.3, 0.2, Color.BLACK);
         ventana.dibujaCirculo(x+0.3, y+0.3, 0.2, Color.BLACK);
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-    
+    }    
 }
