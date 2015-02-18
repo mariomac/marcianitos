@@ -1,4 +1,7 @@
+package edu.upc.moo.movil;
 
+
+import edu.upc.moo.gui.Ventana;
 import java.awt.Color;
 
 /*------------------------------------------------------------------------------
@@ -12,23 +15,27 @@ import java.awt.Color;
  * posible, de las buenas) como recompensa por mi contribución.
  * -----------------------------------------------------------------------------
  */
-
-public class Nave {
-    double x, y;
-
-    Nave(double x, double y) {
+public class Marcianito {
+    private double x,y;
+    
+    private double velocidad;
+    
+    public Marcianito(double x, double y) {
         this.x = x;
         this.y = y;
+        velocidad = -0.3f;
     }
     
-    void moverYDibujar(Ventana v) {
-        if(v.isPulsadoDerecha() && x < 10) {
-            x+=0.3;
+    public void moverYDibujar(Ventana ventana) {
+        x += velocidad;
+        if(x > 10 || x < -10) {
+            velocidad = -velocidad;
+            y -= 0.5;
         }
-        if(v.isPulsadoIzquierda() && x > -10) {
-            x-=0.3;
-        }
-        v.dibujaTriangulo(x-0.7, y-0.7, x, y+0.7, x+0.7, y-0.7, Color.WHITE);
+        
+        ventana.dibujaCirculo(x, y, 1, Color.green);
+        ventana.dibujaCirculo(x-0.3, y+0.3, 0.2, Color.BLACK);
+        ventana.dibujaCirculo(x+0.3, y+0.3, 0.2, Color.BLACK);
     }
     
 }

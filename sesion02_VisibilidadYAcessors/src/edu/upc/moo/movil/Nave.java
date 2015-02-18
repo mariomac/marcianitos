@@ -1,4 +1,7 @@
+package edu.upc.moo.movil;
 
+
+import edu.upc.moo.gui.Ventana;
 import java.awt.Color;
 
 /*------------------------------------------------------------------------------
@@ -14,14 +17,14 @@ import java.awt.Color;
  */
 
 public class Nave {
-    double x, y;
+    private double x, y;
 
-    Nave(double x, double y) {
+    public Nave(double x, double y) {
         this.x = x;
         this.y = y;
     }
     
-    void moverYDibujar(Ventana v) {
+    public void moverYDibujar(Ventana v) {
         if(v.isPulsadoDerecha() && x < 10) {
             x+=0.3;
         }
