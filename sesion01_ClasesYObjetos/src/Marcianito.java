@@ -13,11 +13,11 @@ import java.awt.Color;
  * -----------------------------------------------------------------------------
  */
 public class Marcianito {
-    float x,y;
+    double x,y;
     
-    float velocidad;
+    double velocidad;
     
-    Marcianito(float x, float y) {
+    Marcianito(double x, double y) {
         this.x = x;
         this.y = y;
         velocidad = -0.3f;
@@ -27,6 +27,7 @@ public class Marcianito {
         x += velocidad;
         if(x > 10 || x < -10) {
             velocidad = -velocidad;
+            y -= 0.5;
         }
         
         ventana.dibujaCirculo(x, y, 1, Color.green);
