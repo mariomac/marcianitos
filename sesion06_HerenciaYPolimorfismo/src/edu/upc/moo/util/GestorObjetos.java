@@ -14,6 +14,7 @@ package edu.upc.moo.util;
 import edu.upc.moo.gui.Ventana;
 import edu.upc.moo.movil.ObjetoMovil;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class GestorObjetos {
@@ -37,11 +38,14 @@ public class GestorObjetos {
     public void moverYDibujarTodo(Ventana v) {
         // Para evitar la "concurrent Modification Exception", recorremos una copia de
         // la lista que se modificará
-        ObjetoMovil[] copia = new ObjetoMovil[objetos.size()];
-        objetos.toArray(copia);
+        ObjetoMovil[] copia = getArray();
         for(ObjetoMovil o : copia) {
             o.moverYDibujar(v);
         }
     }
     
+    public ObjetoMovil[] getArray() {
+        ObjetoMovil[] arr = new ObjetoMovil[objetos.size()];
+        return objetos.toArray(arr);
+    }
 }
