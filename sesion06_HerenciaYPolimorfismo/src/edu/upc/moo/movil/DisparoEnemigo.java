@@ -18,7 +18,7 @@ import java.awt.Color;
  *
  * @author mmacias
  */
-public class DisparoEnemigo {
+public class DisparoEnemigo implements ObjetoMovil {
       public static final double RADIO = 0.3;
     public static final double VELOCIDAD = -0.2;
     
@@ -29,7 +29,7 @@ public class DisparoEnemigo {
         this.y = y;
     }
     
-    void moverYDibujar(Ventana v) {
+    public void moverYDibujar(Ventana v) {
         y += VELOCIDAD;
         v.dibujaCirculo(x, y, RADIO, Color.red);
     }  

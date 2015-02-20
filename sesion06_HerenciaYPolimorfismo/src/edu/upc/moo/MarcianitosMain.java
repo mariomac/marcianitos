@@ -15,6 +15,7 @@ package edu.upc.moo;
 import edu.upc.moo.movil.Marcianito;
 import edu.upc.moo.movil.Nave;
 import edu.upc.moo.gui.Ventana;
+import edu.upc.moo.util.GestorObjetos;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -40,21 +41,17 @@ public class MarcianitosMain {
      */
     public static void main(String[] args) {
         Ventana ventana = new Ventana("Marcianitos!", ANCHO_VENTANA_PIXELS,ALTO_VENTANA_PIXELS);
-        
-        HashSet<Marcianito> escuadron = new HashSet<Marcianito>();
+                
         for(int i = 0 ; i < MARCIANOS_INICIALES ; i++) {
-            escuadron.add(new Marcianito(
+            GestorObjetos.INSTANCIA.anyadir(new Marcianito(
                             RND.nextDouble()*2*TAMANYO_EJES_VISION-TAMANYO_EJES_VISION,
                             Y_INICIAL_MARCIANOS + i * ESPACIO_VERTICAL_ENTRE_MARCIANOS));
         }
         
-        Nave nave = new Nave(X_INICIAL_NAVE, Y_INICIAL_NAVE);
+        GestorObjetos.INSTANCIA.anyadir(new Nave(X_INICIAL_NAVE, Y_INICIAL_NAVE));
         
         while(!ventana.isPulsadoEscape()) {
-            for(Marcianito m : escuadron) {
-                m.moverYDibujar(ventana);
-            }
-            nave.moverYDibujar(ventana);
+            GestorObjetos.INSTANCIA.moverYDibujarTodo(ventana);
             ventana.actualizaFotograma();
         }
         

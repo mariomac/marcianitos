@@ -12,25 +12,7 @@
 package edu.upc.moo.movil;
 
 import edu.upc.moo.gui.Ventana;
-import java.awt.Color;
 
-public class Disparo implements ObjetoMovil {
-    public static final double RADIO = 0.3;
-    public static final double VELOCIDAD = 0.8;
-    
-    private double x, y;
-    
-    public Disparo(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-    
-    public void moverYDibujar(Ventana v) {
-        y += VELOCIDAD;
-        v.dibujaCirculo(x, y, RADIO, Color.yellow);
-    }
-    
-    
-    
-    
+public interface ObjetoMovil {
+    void moverYDibujar(Ventana v);
 }

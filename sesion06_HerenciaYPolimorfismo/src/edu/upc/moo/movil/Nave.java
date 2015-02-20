@@ -3,6 +3,7 @@ package edu.upc.moo.movil;
 
 import edu.upc.moo.MarcianitosMain;
 import edu.upc.moo.gui.Ventana;
+import edu.upc.moo.util.GestorObjetos;
 import java.awt.Color;
 import java.util.HashSet;
 
@@ -18,14 +19,14 @@ import java.util.HashSet;
  * -----------------------------------------------------------------------------
  */
 
-public class Nave {
+public class Nave implements ObjetoMovil {
     
     public static final double VELOCIDAD = 0.3;
     
     private double x, y;
     
     private HashSet<Disparo> disparos;
-
+    
     public Nave(double x, double y) {
         this.x = x;
         this.y = y;

@@ -9,28 +9,39 @@
  * posible, de las buenas) como recompensa por mi contribución.
  * -----------------------------------------------------------------------------
  */
-package edu.upc.moo.movil;
+package edu.upc.moo.util;
 
 import edu.upc.moo.gui.Ventana;
-import java.awt.Color;
+import edu.upc.moo.movil.ObjetoMovil;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Disparo implements ObjetoMovil {
-    public static final double RADIO = 0.3;
-    public static final double VELOCIDAD = 0.8;
+public class GestorObjetos {
     
-    private double x, y;
+    public static final GestorObjetos INSTANCIA = new GestorObjetos();
     
-    public Disparo(double x, double y) {
-        this.x = x;
-        this.y = y;
+    private Set<ObjetoMovil> objetos;
+    
+    private GestorObjetos() {
+        objetos = new HashSet<ObjetoMovil>();
+    }
+            
+    public void anyadir(ObjetoMovil o) {
+        objetos.add(o);
     }
     
-    public void moverYDibujar(Ventana v) {
-        y += VELOCIDAD;
-        v.dibujaCirculo(x, y, RADIO, Color.yellow);
+    public void eliminar(ObjetoMovil o) {
+        objetos.remove(o);
     }
     
-    
-    
+    public void moverYDibujarTodo(Ventana v) {
+        // Para evitar la "concurrent Modification Exception", recorremos una copia de
+        // la lista que se modificará
+        ObjetoMovil[] copia = new ObjetoMovil[objetos.size()];
+        objetos.toArray(copia);
+        for(ObjetoMovil o : copia) {
+            o.moverYDibujar(v);
+        }
+    }
     
 }
