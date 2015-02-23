@@ -43,8 +43,8 @@ public class MarcianitosMain {
     public static void main(String[] args) {
         Ventana ventana = new Ventana("Marcianitos!", ANCHO_VENTANA_PIXELS,ALTO_VENTANA_PIXELS);
                
-        
-        GestorObjetos.INSTANCIA.anyadir(new Nave(X_INICIAL_NAVE, Y_INICIAL_NAVE));
+        Nave nave = new Nave(X_INICIAL_NAVE, Y_INICIAL_NAVE);
+        GestorObjetos.INSTANCIA.anyadir(nave);
         
         int fotogramas = 0;
         while(!ventana.isPulsadoEscape()) {
