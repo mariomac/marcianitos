@@ -1,3 +1,3 @@
-*TODO* Reflejar singleton. Cambiar metodo a moverYDibujarTodo
+TODO: meter interfaz "Colisionable"
 
 ![](diagramaDeClases.png)
