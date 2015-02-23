@@ -11,12 +11,17 @@
  */
 package edu.upc.moo.movil;
 
+import edu.upc.moo.fisica.Colisionable;
 import edu.upc.moo.gui.Ventana;
+import edu.upc.moo.util.GestorObjetos;
 import java.awt.Color;
+import java.util.Iterator;
 
-public class Disparo {
+public class Disparo extends Colisionable implements ObjetoMovil {
     public static final double RADIO = 0.3;
     public static final double VELOCIDAD = 0.8;
+    
+    private static final double MAX_DISTANCIA = 10;
     
     private double x, y;
     
@@ -25,10 +30,41 @@ public class Disparo {
         this.y = y;
     }
     
-    void moverYDibujar(Ventana v) {
+    public void moverYDibujar(Ventana v) {
         y += VELOCIDAD;
         v.dibujaCirculo(x, y, RADIO, Color.yellow);
+
+        for(ObjetoMovil om : GestorObjetos.INSTANCIA.getArray()) {
+            if(om instanceof Marcianito) {
+                if(colisiona((Colisionable)om)) {
+                    GestorObjetos.INSTANCIA.eliminar(this);
+                    GestorObjetos.INSTANCIA.eliminar(om);
+                }
+            }
+        }
+        
+        if(y > MAX_DISTANCIA) {
+            GestorObjetos.INSTANCIA.eliminar(this);
+        }
+        
     }
+
+    @Override
+    public double getOX() {
+        return x;
+    }
+
+    @Override
+    public double getOY() {
+        return y;
+    }
+
+    @Override
+    public double getR() {
+        return RADIO;
+    }
+    
+    
     
     
     

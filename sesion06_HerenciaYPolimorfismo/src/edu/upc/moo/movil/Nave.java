@@ -3,8 +3,10 @@ package edu.upc.moo.movil;
 
 import edu.upc.moo.MarcianitosMain;
 import edu.upc.moo.gui.Ventana;
+import edu.upc.moo.util.GestorObjetos;
 import java.awt.Color;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /*------------------------------------------------------------------------------
  * Este código está distribuido bajo una licencia del tipo BEER-WARE.
@@ -18,18 +20,15 @@ import java.util.HashSet;
  * -----------------------------------------------------------------------------
  */
 
-public class Nave {
+public class Nave implements ObjetoMovil {
     
     public static final double VELOCIDAD = 0.3;
     
     private double x, y;
-    
-    private HashSet<Disparo> disparos;
-
+        
     public Nave(double x, double y) {
         this.x = x;
         this.y = y;
-        disparos = new HashSet<>();
     }
     
     public void moverYDibujar(Ventana v) {
@@ -40,12 +39,12 @@ public class Nave {
             x-=VELOCIDAD;
         }
         if(v.isPulsadoEspacio()) {
-            disparos.add(new Disparo(this.x, this.y));
+            GestorObjetos.INSTANCIA.anyadir(new Disparo(this.x, this.y));
         }
-        for(Disparo d : disparos) {
-            d.moverYDibujar(v);
-        }
+
         v.dibujaTriangulo(x-0.7, y-0.7, x, y+0.7, x+0.7, y-0.7, Color.WHITE);
+        
+        
     }
     
 }

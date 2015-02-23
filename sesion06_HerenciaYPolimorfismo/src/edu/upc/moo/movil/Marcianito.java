@@ -2,7 +2,9 @@ package edu.upc.moo.movil;
 
 
 import edu.upc.moo.MarcianitosMain;
+import edu.upc.moo.fisica.Colisionable;
 import edu.upc.moo.gui.Ventana;
+import edu.upc.moo.util.GestorObjetos;
 import java.awt.Color;
 import java.util.HashSet;
 
@@ -17,7 +19,7 @@ import java.util.HashSet;
  * posible, de las buenas) como recompensa por mi contribución.
  * -----------------------------------------------------------------------------
  */
-public class Marcianito {
+public class Marcianito extends Colisionable implements ObjetoMovil {
     public static final double SALTO_BAJADA = 0.5;
     public static final double VELOCIDAD_INICIAL = 0.3;
     public static final int FRECUENCIA_DISPARO = 50;
@@ -27,9 +29,7 @@ public class Marcianito {
     private double x,y;
     
     private double velocidad;
-    
-    private HashSet<DisparoEnemigo> disparos;
-    
+        
     public Marcianito(double x, double y) {
         this.x = x;
         this.y = y;
@@ -38,7 +38,6 @@ public class Marcianito {
         } else {
             velocidad = -VELOCIDAD_INICIAL;
         }
-        disparos = new HashSet<DisparoEnemigo>();
     }
     
     public void moverYDibujar(Ventana ventana) {
@@ -48,13 +47,26 @@ public class Marcianito {
             y -= SALTO_BAJADA;
         }
         if(MarcianitosMain.RND.nextInt(FRECUENCIA_DISPARO) == 0) {
-            disparos.add(new DisparoEnemigo(this.x, this.y));
+            GestorObjetos.INSTANCIA.anyadir(new DisparoEnemigo(this.x, this.y));
         }
-        for(DisparoEnemigo d : disparos) {
-            d.moverYDibujar(ventana);
-        }
+
         ventana.dibujaCirculo(x, y, LONG_RADIO, Color.green);
         ventana.dibujaCirculo(x-0.3, y+0.3, 0.2, Color.BLACK);
         ventana.dibujaCirculo(x+0.3, y+0.3, 0.2, Color.BLACK);
-    }    
+    }   
+    
+        @Override
+    public double getOX() {
+        return x;
+    }
+
+    @Override
+    public double getOY() {
+        return y;
+    }
+
+    @Override
+    public double getR() {
+        return LONG_RADIO;
+    }
 }
